@@ -1,13 +1,36 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": ["**/.env"],
-  "pipeline": {
+  "tasks": {
     "topo": {
       "dependsOn": ["^topo"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "next-env.d.ts",
+        ".expo/**",
+        ".output/**",
+        ".vercel/output/**"
+      ]
     },
     "dev": {
       "persistent": true,
       "cache": false
+    },
+    "format": {
+      "outputs": ["node_modules/.cache/.prettiercache"],
+      "outputLogs": "new-only"
+    },
+    "lint": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": ["node_modules/.cache/.eslintcache"]
+    },
+    "typecheck": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
     },
     "db:generate": {
       "inputs": ["prisma/schema.prisma"],
@@ -17,21 +40,23 @@
       "inputs": ["prisma/schema.prisma"],
       "cache": false
     },
-    "build": {
-      "dependsOn": ["^build", "^db:generate"],
-      "outputs": ["dist/**"]
+    "clean": {
+      "cache": false
     },
-    "format": {
-      "outputs": ["node_modules/.cache/.prettiercache"],
-      "outputMode": "new-only"
+    "//#clean": {
+      "cache": false
     },
-    "lint": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/.eslintcache"]
+    "push": {
+      "cache": false,
+      "interactive": true
     },
-    "typecheck": {
-      "dependsOn": ["^topo"],
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+    "studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "ui-add": {
+      "cache": false,
+      "interactive": true
     }
   }
 }

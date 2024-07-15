@@ -17,15 +17,15 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.1"
+    "@prisma/client": "^5.16.2"
   },
   "devDependencies": {
     "@acme/eslint-config": "workspace:^0.2.0",
     "@acme/prettier-config": "workspace:^0.1.0",
     "@acme/tsconfig": "workspace:^0.1.0",
-    "dotenv-cli": "^7.3.0",
-    "prisma": "^5.7.1",
-    "typescript": "^5.3.3"
+    "dotenv-cli": "^7.4.2",
+    "prisma": "^5.16.2",
+    "typescript": "^5.5.3"
   },
   "eslintConfig": {
     "root": true,
